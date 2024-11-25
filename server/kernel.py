@@ -39,6 +39,7 @@ def download_server_jar(project, minecraft_version):
         jar_name = f"paper-{minecraft_version}-{latest_build}.jar"
         api_url = f"https://api.papermc.io/v2/projects/{project}/versions/{minecraft_version}/builds/{latest_build}/downloads/{jar_name}"
         subprocess.run(["curl", "-o", "server.jar", api_url])
+        print("server.jar downloaded")
         time.sleep(5)
         return
     else:
@@ -77,8 +78,10 @@ def start_server():
     subprocess.run(
         ["tmux", "new-session", "-d", "-s", "minecraft", "java", "-Xmx1024M", "-Xms512M", "-jar", "server.jar",
          "nogui"])
-    print("Server started.")
-    time.sleep(5)
+    print("Server is starting.")
+    time.sleep(30)
+    print("server started")
+    time.sleep("5")
     return
 #run start script
 
@@ -105,10 +108,10 @@ def main():
             print("2. Install server jar(requierd for first time)")
             print("3. Accept EULA(user agreement)")
             print("4. Install ngrok(requiered for non local connection)")
-            print("6. Configure ngrok")
-            print("7.start server and ngrok")
-            print("8.Close server and ngrok")
-            print("9.exit")
+            print("5. Configure ngrok")
+            print("6.start server and ngrok")
+            print("7.Close server and ngrok")
+            print("8.exit")
 
             option = input("Enter your choice: ")
 
@@ -126,18 +129,18 @@ def main():
             elif option == "4":
                 install_ngrok()
 
-            elif option == "6":
+            elif option == "5":
                 auth_token = input("Enter your ngrok auth token: ")
                 configure_ngrok(auth_token)
 
-            elif option == "7":
+            elif option == "6":
                 start_server()
                 start_ngrok()
 
-            elif option == "8":
+            elif option == "7":
                 close_server_and_ngrok()
 
-            elif option =="9":
+            elif option =="8":
                 exit   
 
             else:
