@@ -141,7 +141,7 @@ def main():
                 close_server_and_ngrok()
 
             elif option =="8":
-                exit   
+                exit()   
 
             else:
                 print("Invalid choice. Please try again.")
