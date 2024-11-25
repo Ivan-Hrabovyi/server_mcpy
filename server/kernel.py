@@ -14,10 +14,10 @@ def run_command(command):
 
 def install_jdk():
     print("Installing JDK")
-    subprocess.run(["sudo", "apt", "update"])
-    subprocess.run(["sudo","apt","upgrade"])
-    subprocess.run(["sudo", "apt", "install", "tmux"])
-    subprocess.run(["sudo", "apt", "install", "openjdk-17-jre-headless"])
+    run_command(["sudo", "apt", "update"])
+    run_command(["sudo","apt","upgrade"])
+    run_command(["sudo", "apt", "install", "tmux"])
+    run_command(["sudo", "apt", "install", "openjdk-17-jre-headless"])
     print("JDK installed")
     time.sleep(5)
     return
@@ -38,7 +38,7 @@ def download_server_jar(project, minecraft_version):
     if latest_build is not None:
         jar_name = f"paper-{minecraft_version}-{latest_build}.jar"
         api_url = f"https://api.papermc.io/v2/projects/{project}/versions/{minecraft_version}/builds/{latest_build}/downloads/{jar_name}"
-        subprocess.run(["curl", "-o", "server.jar", api_url])
+        run_command(["curl", "-o", "server.jar", api_url])
         print("server.jar downloaded")
         time.sleep(5)
         return
@@ -75,7 +75,7 @@ def configure_ngrok(auth_token):
 #update config with token
 
 def start_server():
-    subprocess.run(
+    run_command(
         ["tmux", "new-session", "-d", "-s", "minecraft", "java", "-Xmx1024M", "-Xms512M", "-jar", "server.jar",
          "nogui"])
     print("Server is starting.")
@@ -86,7 +86,7 @@ def start_server():
 #run start script
 
 def start_ngrok():
-    subprocess.run(["tmux", "new-session", "-d", "-s", "ngrok-session", "ngrok", "tcp", "25565"])
+    run_command(["tmux", "new-session", "-d", "-s", "ngrok-session", "ngrok", "tcp", "25565"])
     print("Ngrok started.")
     time.sleep(5)
     return
