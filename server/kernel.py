@@ -81,7 +81,7 @@ def start_server():
     print("Server is starting.")
     time.sleep(30)
     print("server started")
-    time.sleep("5")
+    time.sleep(5)
     return
 #run start script
 
